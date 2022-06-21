@@ -12,7 +12,12 @@ pip install -r requirements.txt
 
 ### Launching
 
-TODO
+```bash
+# production
+uvicorn backend.main:app
+# development
+uvicorn backend.main:app --reload
+```
 
 ### Exiting from project env
 
