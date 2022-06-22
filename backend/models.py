@@ -16,9 +16,6 @@ class Tokens(models.Model):
 Token_Pydantic = pydantic_model_creator(Tokens, name="Token")
 
 
-# looks like we don't  need it
-# TokenIn_Pydantic = pydantic_model_creator(Tokens, name="TokensIn", exclude_readonly=True)
-
 class TokenIn_Pydantic(BaseModel):
     media_url: str = Field(..., max_length=2024)
     owner: str = Field(..., max_length=42)
