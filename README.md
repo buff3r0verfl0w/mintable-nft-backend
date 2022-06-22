@@ -19,6 +19,8 @@ cp config.example.yml config.yml
 
 ### Launching
 
+#### Local
+
 ```bash
 # production
 uvicorn backend.main:app
@@ -26,8 +28,22 @@ uvicorn backend.main:app
 uvicorn backend.main:app --reload
 ```
 
-### Exiting from project env
+##### Exiting from project env
 
 ```bash
 deactivate
 ```
+
+#### Inside docker container
+```bash
+git clone git@github.com:buff3r0verfl0w/mintable-nft-backend.git
+cd mintable-nft-backend
+
+cp config.example.yml config.yml
+
+docker build -t mintable-nft-backend .
+docker run --rm -itd --name backend -p 8000:8000 mintable-nft-backend
+```
+
+### Interaction with API
+If you're running it in docker you can open <http://127.0.0.1:8000/docs> in your browser
