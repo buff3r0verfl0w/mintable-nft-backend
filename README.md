@@ -2,6 +2,11 @@
 
 Test task for backend developer at Rock'n'Block
 
+### Technology stack
+- [ethereum/web3.py](https://github.com/ethereum/web3.py) - interacts with smart contract
+- [tiangolo/fastapi](https://github.com/tiangolo/fastapi) - used to build API
+- [tortoise/tortoise-orm](https://github.com/tortoise/tortoise-orm) - used to connect SQLite3 database
+
 ### Installing
 
 ```bash
