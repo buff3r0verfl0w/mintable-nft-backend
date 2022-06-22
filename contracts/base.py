@@ -12,4 +12,4 @@ class ContractInfo:
     network_name: str
     chain_id: int
     address: str
-    abi: str
+    abi_path: str

@@ -1,33 +1,31 @@
 from os import urandom
 from typing import List
+from yaml import safe_load
+from marshmallow_dataclass import class_schema
 
 from fastapi import FastAPI
 from tortoise.contrib.fastapi import register_tortoise
 
-from contracts.base import UserInfo, ContractInfo
 from contracts.mintable_nft import MintableNFTContract
 
 from .models import Token_Pydantic, TokenIn_Pydantic, Tokens
+from .config import Config
+
+with open("config.yml") as file:
+    yaml = safe_load(file.read())
+
+    ConfigSchema = class_schema(Config)
+    config: Config = ConfigSchema().load(yaml)
 
 app = FastAPI()
 
-# TODO: envs/configs
-user_info = UserInfo(
-    "0x7B17559C240aE7793B658B703da74Ce512cF955b",
-    "ff00436583fcaaa0ccc6d1015356a92b0f5210e3c5b204b7507cce1a3e8f0352",
-)
-
-with open("resources/abi.json") as file:
-    abi = file.read()
-
-contract_info = ContractInfo("Rinkeby", 4, "0x92e098deF0CA9577BD50ca61B90b9A46EC1F2040", abi)
-contract = MintableNFTContract(contract_info, "2033296f17d9420d8109f6e61312d96d")
+contract = MintableNFTContract(config.contract_info, config.infura_key)
 
 
 @app.post("/tokens/create", response_model=Token_Pydantic)
 async def create_token(token: TokenIn_Pydantic):
     unique_hash = urandom(10).hex()
-    tx_hash = contract.mint(user_info, token.owner, unique_hash, token.media_url)
+    tx_hash = contract.mint(config.user_info, token.owner, unique_hash, token.media_url)
 
     token_obj = await Tokens.create(
         unique_hash=unique_hash,

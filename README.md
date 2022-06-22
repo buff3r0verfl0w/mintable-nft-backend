@@ -10,6 +10,13 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+### Configuration
+
+```bash
+# now you can change config.yml with actual values
+cp config.example.yml config.yml
+```
+
 ### Launching
 
 ```bash

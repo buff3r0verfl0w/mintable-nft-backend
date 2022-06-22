@@ -11,7 +11,10 @@ class MintableNFTContract:
         self.w3 = Web3(HTTPProvider(f"https://{contract_info.network_name.lower()}.infura.io/v3/{infura_key}"))
         self.w3.middleware_onion.inject(geth_poa_middleware, layer=0)
 
-        self.contract = self.w3.eth.contract(address=contract_info.address, abi=contract_info.abi)
+        with open(contract_info.abi_path) as file:
+            abi = file.read()
+
+        self.contract = self.w3.eth.contract(address=contract_info.address, abi=abi)
 
     def total_supply(self) -> int:
         return self.contract.functions.totalSupply().call()

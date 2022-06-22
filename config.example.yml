@@ -1,0 +1,9 @@
+user_info:
+  address: "0x7B17559C240aE7793B658B703da74Ce512cF955b"
+  private_key: ff00436583fcaaa0ccc6d1015356a92b0f5210e3c5b204b7507cce1a3e8f0352
+contract_info:
+  network_name: Rinkeby
+  chain_id: 4
+  address: "0x92e098deF0CA9577BD50ca61B90b9A46EC1F2040"
+  abi_path: resources/abi.json
+infura_key: 2033296f17d9420d8109f6e61312d96d
