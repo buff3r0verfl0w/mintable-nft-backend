@@ -23,6 +23,8 @@ class MintableNFTContract:
         nonce = self.w3.eth.get_transaction_count(user.address)
         tx = self.contract.functions.mint(owner, unique_hash, media_url).buildTransaction({
             "chainId": self.contract_info.chain_id,
+            "gas": 3000000,
+            "gasPrice": self.w3.eth.gas_price,
             "nonce": nonce,
         })
         signed_tx = self.w3.eth.account.sign_transaction(tx, user.private_key)
