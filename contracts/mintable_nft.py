@@ -29,5 +29,4 @@ class MintableNFTContract:
         })
         signed_tx = self.w3.eth.account.sign_transaction(tx, user.private_key)
         tx_hash = self.w3.eth.send_raw_transaction(signed_tx.rawTransaction)
-        self.w3.eth.wait_for_transaction_receipt(tx_hash)
         return tx_hash.hex()
